@@ -14,7 +14,7 @@
             @Html.DisplayNameFor(model => model.Inspection)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Inspection.Notes)
+            @(Model.Inspection.Premises?.Name ?? "[No premises]") – @Model.Inspection.InspectionDate.ToString("dd/MM/yyyy")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DueDate)

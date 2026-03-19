@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InspectionTracker.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260319175452_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260319230623_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,10 +35,6 @@ namespace InspectionTracker.MVC.Migrations
                     b.Property<int>("InspectionId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.HasIndex("InspectionId");
@@ -56,7 +52,6 @@ namespace InspectionTracker.MVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Outcome")

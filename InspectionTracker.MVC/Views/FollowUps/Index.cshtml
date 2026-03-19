@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<InspectionTracker.Domain.FollowUp>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "FollowUps";
 }
 
-<h1>Index</h1>
+<h1>FollowUps</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -31,9 +31,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Inspection.Notes)
-            </td>
-            <td>
+                    @(item.Inspection.Premises?.Name ?? "[No premises]") – @item.Inspection.InspectionDate.ToString("dd/MM/yyyy")
+                <td>
                 @Html.DisplayFor(modelItem => item.DueDate)
             </td>
             <td>

@@ -1,4 +1,6 @@
-﻿namespace InspectionTracker.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InspectionTracker.Domain
 {
     public class Premises
     {
@@ -6,8 +8,8 @@
         public string Name { get; set; }
         public string Address { get; set; }
         public string Town { get; set; }
-        public string RiskRating { get; set; } // Low/Medium/High
-
+        [RegularExpression("Low|Medium|High", ErrorMessage = "RiskRating must be Low, Medium, or High.")]
+        public string RiskRating { get; set; }
         public List<Inspection> Inspections { get; set; } = new();
     }
 

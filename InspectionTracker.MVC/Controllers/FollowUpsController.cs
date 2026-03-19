@@ -1,5 +1,6 @@
 ﻿using InspectionTracker.Domain;
 using InspectionTracker.MVC.Data;
+using InspectionTracker.MVC.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,8 +24,12 @@ namespace InspectionTracker.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             _log.LogInformation("FollowUps list viewed");
-            var applicationDbContext = _context.FollowUps.Include(f => f.Inspection);
-            return View(await applicationDbContext.ToListAsync());
+
+            var followUps = _context.FollowUps
+                .Include(f => f.Inspection)
+                .ThenInclude(i => i.Premises);   // ← FIX
+
+            return View(await followUps.ToListAsync());
         }
 
         // GET: FollowUps/Details/5
@@ -38,6 +43,7 @@ namespace InspectionTracker.MVC.Controllers
 
             var followUp = await _context.FollowUps
                 .Include(f => f.Inspection)
+                .ThenInclude(i => i.Premises)   // ← FIX
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (followUp == null)
@@ -54,7 +60,13 @@ namespace InspectionTracker.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public IActionResult Create()
         {
-            ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes");
+            var inspections = _context.Inspections
+                .Include(i => i.Premises)
+                .ToList()
+                .Select(i => i.ToDisplayDto())
+                .ToList();
+
+            ViewData["InspectionId"] = new SelectList(inspections, "Id", "Display");
             return View();
         }
 
@@ -62,12 +74,19 @@ namespace InspectionTracker.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,InspectionId,DueDate,Status,ClosedDate")] FollowUp followUp)
+        public async Task<IActionResult> Create([Bind("Id,InspectionId,DueDate,ClosedDate")] FollowUp followUp)
         {
             if (!ModelState.IsValid)
             {
                 _log.LogWarning("FollowUp Create attempted with invalid model state");
-                ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
+
+                var inspections = _context.Inspections
+                    .Include(i => i.Premises)
+                    .ToList()
+                    .Select(i => i.ToDisplayDto())
+                    .ToList();
+
+                ViewData["InspectionId"] = new SelectList(inspections, "Id", "Display", followUp.InspectionId);
                 return View(followUp);
             }
 
@@ -115,7 +134,13 @@ namespace InspectionTracker.MVC.Controllers
                 return NotFound();
             }
 
-            ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
+            var inspections = _context.Inspections
+                .Include(i => i.Premises)
+                .ToList()
+                .Select(i => i.ToDisplayDto())
+                .ToList();
+
+            ViewData["InspectionId"] = new SelectList(inspections, "Id", "Display", followUp.InspectionId);
             return View(followUp);
         }
 
@@ -123,7 +148,7 @@ namespace InspectionTracker.MVC.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,InspectionId,DueDate,Status,ClosedDate")] FollowUp followUp)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,InspectionId,DueDate,ClosedDate")] FollowUp followUp)
         {
             if (id != followUp.Id)
             {
@@ -134,7 +159,14 @@ namespace InspectionTracker.MVC.Controllers
             if (!ModelState.IsValid)
             {
                 _log.LogWarning("FollowUp Edit attempted with invalid model state");
-                ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
+
+                var inspections = _context.Inspections
+                    .Include(i => i.Premises)
+                    .ToList()
+                    .Select(i => i.ToDisplayDto())
+                    .ToList();
+
+                ViewData["InspectionId"] = new SelectList(inspections, "Id", "Display", followUp.InspectionId);
                 return View(followUp);
             }
 
@@ -179,6 +211,7 @@ namespace InspectionTracker.MVC.Controllers
 
             var followUp = await _context.FollowUps
                 .Include(f => f.Inspection)
+                .ThenInclude(i => i.Premises)   // ← FIX
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (followUp == null)

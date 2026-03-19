@@ -41,9 +41,5 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<Inspection>()
             .Property(i => i.Outcome)
             .IsRequired();
-
-        builder.Entity<FollowUp>()
-            .Property(f => f.Status)
-            .IsRequired();
     }
 }

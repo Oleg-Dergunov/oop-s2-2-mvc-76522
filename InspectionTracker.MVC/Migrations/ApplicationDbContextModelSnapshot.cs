@@ -32,10 +32,6 @@ namespace InspectionTracker.MVC.Migrations
                     b.Property<int>("InspectionId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.HasIndex("InspectionId");
@@ -53,7 +49,6 @@ namespace InspectionTracker.MVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Outcome")

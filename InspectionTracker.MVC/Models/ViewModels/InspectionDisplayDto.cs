@@ -1,0 +1,9 @@
+﻿namespace InspectionTracker.MVC.Models.ViewModels
+{
+    public class InspectionDisplayDto
+    {
+        public int Id { get; set; }
+        public string Display { get; set; } = string.Empty;
+    }
+
+}

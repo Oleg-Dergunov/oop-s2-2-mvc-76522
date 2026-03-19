@@ -54,7 +54,7 @@ namespace InspectionTracker.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public IActionResult Create()
         {
-            ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address");
+            ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Name");
             return View();
         }
 
@@ -66,8 +66,17 @@ namespace InspectionTracker.MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                foreach (var kvp in ModelState)
+                {
+                    foreach (var error in kvp.Value.Errors)
+                    {
+                        _log.LogWarning("ModelState error in field {Field}: {Error}",
+                            kvp.Key, error.ErrorMessage);
+                    }
+                }
+
                 _log.LogWarning("Inspection Create attempted with invalid model state");
-                ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
+                ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Name", inspection.PremisesId);
                 return View(inspection);
             }
 
@@ -104,7 +113,7 @@ namespace InspectionTracker.MVC.Controllers
                 return NotFound();
             }
 
-            ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
+            ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Name", inspection.PremisesId);
             return View(inspection);
         }
 
@@ -123,7 +132,7 @@ namespace InspectionTracker.MVC.Controllers
             if (!ModelState.IsValid)
             {
                 _log.LogWarning("Inspection Edit attempted with invalid model state");
-                ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
+                ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Name", inspection.PremisesId);
                 return View(inspection);
             }
 

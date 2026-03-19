@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<InspectionTracker.Domain.Inspection>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inspections";
 }
 
-<h1>Index</h1>
+<h1>Inspections</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -34,7 +34,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Premises.Address)
+                @Html.DisplayFor(modelItem => item.Premises.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InspectionDate)

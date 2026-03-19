@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InspectionTracker.MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -182,7 +182,7 @@ namespace InspectionTracker.MVC.Migrations
                     InspectionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Score = table.Column<int>(type: "INTEGER", nullable: false),
                     Outcome = table.Column<string>(type: "TEXT", nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", nullable: false)
+                    Notes = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,7 +203,6 @@ namespace InspectionTracker.MVC.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     InspectionId = table.Column<int>(type: "INTEGER", nullable: false),
                     DueDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<string>(type: "TEXT", nullable: false),
                     ClosedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
