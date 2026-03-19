@@ -1,8 +1,22 @@
 using InspectionTracker.MVC.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Context;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog configuration
+Log.Logger = new LoggerConfiguration()
+    .Enrich.WithProperty("Application", "InspectionTracker")
+    .Enrich.WithEnvironmentName()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -15,7 +29,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders()
+.AddDefaultUI();
 
 builder.Services.AddAuthorization();
 builder.Services.AddControllersWithViews();
@@ -41,6 +56,17 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.Use(async (context, next) =>
+{
+    var userName = context.User.Identity?.IsAuthenticated == true
+        ? context.User.Identity.Name
+        : "Anonymous";
+
+    LogContext.PushProperty("UserName", userName);
+
+    await next();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -48,5 +74,16 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+// Seed roles and test users
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+
+    await RoleSeeder.SeedAsync(roleManager, userManager);
+}
 
 app.Run();
