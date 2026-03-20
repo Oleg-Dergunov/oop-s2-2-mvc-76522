@@ -18,6 +18,7 @@ public class ApplicationDbContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        DataSeeder.Seed(builder);
 
         // Premises → Inspections (1-many)
         builder.Entity<Premises>()
