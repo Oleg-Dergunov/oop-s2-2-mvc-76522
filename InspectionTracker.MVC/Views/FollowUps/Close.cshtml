@@ -1,0 +1,37 @@
+﻿@model InspectionTracker.Domain.FollowUp
+
+@{
+    ViewData["Title"] = "Close";
+}
+
+<h1>Close</h1>
+
+<h3>Are you sure you want to close this follow-up?</h3>
+
+<div>
+    <h4>FollowUp</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Inspection</dt>
+        <dd class="col-sm-10">
+            @(Model.Inspection.Premises?.Name ?? "[No premises]") –
+            @Model.Inspection.InspectionDate.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt class="col-sm-2">Due Date</dt>
+        <dd class="col-sm-10">@Model.DueDate</dd>
+
+        <dt class="col-sm-2">Status</dt>
+        <dd class="col-sm-10">@Model.Status</dd>
+
+        <dt class="col-sm-2">Closed Date</dt>
+        <dd class="col-sm-10">@Model.ClosedDate</dd>
+    </dl>
+
+    <form asp-action="Close" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Close" class="btn btn-success" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -253,6 +253,43 @@ namespace InspectionTracker.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Inspector")]
+        public async Task<IActionResult> Close(int id)
+        {
+            var followUp = await _context.FollowUps
+                .Include(f => f.Inspection)
+                .ThenInclude(i => i.Premises)
+                .FirstOrDefaultAsync(f => f.Id == id);
+
+            if (followUp == null)
+                return NotFound();
+
+            return View(followUp);
+        }
+
+        // Closes a follow-up by setting ClosedDate today.
+        // If the follow-up is already closed, the operation is ignored.
+        // Available only to Inspector
+        [Authorize(Roles = "Inspector")]
+        [HttpPost, ActionName("Close")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CloseConfirmed(int id)
+        {
+            var followUp = await _context.FollowUps.FindAsync(id);
+            if (followUp == null)
+                return NotFound();
+
+            // Already closed → do nothing
+            if (followUp.ClosedDate != null)
+                return RedirectToAction("Index");
+
+            followUp.ClosedDate = DateTime.Today;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
         private bool FollowUpExists(int id)
         {
             return _context.FollowUps.Any(e => e.Id == id);
