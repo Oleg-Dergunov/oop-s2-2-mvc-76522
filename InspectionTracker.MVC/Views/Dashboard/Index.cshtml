@@ -1,0 +1,39 @@
+﻿@model DashboardViewModel
+
+<h1>Dashboard</h1>
+
+<form method="get">
+    <label>Town:</label>
+    <select name="town">
+        <option value="">All</option>
+        @foreach (var t in Model.Towns)
+        {
+            <option value="@t" selected="@(t == Model.Town)">
+                @t
+            </option>
+        }
+    </select>
+
+    <label>Risk Rating:</label>
+    <select name="riskRating">
+        <option value="">All</option>
+        @foreach (var r in Model.RiskRatings)
+        {
+            <option value="@r" selected="@(r == Model.RiskRating)">
+                @r
+            </option>
+        }
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+
+<hr />
+
+<h3>Summary</h3>
+
+<ul>
+    <li>Total inspections this month: <strong>@Model.TotalInspectionsThisMonth</strong></li>
+    <li>Failed inspections this month: <strong>@Model.FailedInspectionsThisMonth</strong></li>
+    <li>Overdue open follow-ups: <strong>@Model.OverdueOpenFollowUps</strong></li>
+</ul>

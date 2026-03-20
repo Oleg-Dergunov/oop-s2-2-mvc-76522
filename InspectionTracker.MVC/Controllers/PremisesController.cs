@@ -17,7 +17,7 @@ namespace InspectionTracker.MVC.Controllers
             _context = context;
             _log = log;
         }
-
+       
         // GET: Premises
         public async Task<IActionResult> Index()
         {

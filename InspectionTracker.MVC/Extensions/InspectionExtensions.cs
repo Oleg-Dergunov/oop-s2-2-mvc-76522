@@ -1,5 +1,5 @@
 ﻿using InspectionTracker.Domain;
-using InspectionTracker.MVC.Models.ViewModels;
+using InspectionTracker.MVC.Models;
 
 namespace InspectionTracker.MVC.Extensions
 {

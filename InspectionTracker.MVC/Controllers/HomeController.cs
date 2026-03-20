@@ -1,6 +1,8 @@
-using System.Diagnostics;
 using InspectionTracker.MVC.Models;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System.Diagnostics;
 
 namespace InspectionTracker.MVC.Controllers
 {
@@ -23,10 +25,25 @@ namespace InspectionTracker.MVC.Controllers
             return View();
         }
 
+
+        // Global error handler
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            if (exceptionFeature != null)
+            {
+                Log.Error(exceptionFeature.Error,
+                    "Unhandled exception at {Path}",
+                    exceptionFeature.Path);
+            }
+
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
+
     }
 }

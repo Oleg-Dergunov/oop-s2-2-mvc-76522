@@ -3,11 +3,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Context;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Serilog configuration
 Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware", LogEventLevel.Fatal)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Error)
     .Enrich.WithProperty("Application", "InspectionTracker")
     .Enrich.WithEnvironmentName()
     .Enrich.FromLogContext()
