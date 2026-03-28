@@ -2,17 +2,8 @@
 using InspectionTracker.MVC.Controllers;
 using InspectionTracker.MVC.Data;
 using InspectionTracker.MVC.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InspectionTracker.Tests
 {
@@ -61,7 +52,6 @@ namespace InspectionTracker.Tests
                 Id = 1,
                 PremisesId = 1,
                 InspectionDate = thisMonth,
-                Outcome = "Fail",
                 Score = 50
             };
 
@@ -70,8 +60,7 @@ namespace InspectionTracker.Tests
                 Id = 2,
                 PremisesId = 2,
                 InspectionDate = lastMonth,
-                Outcome = "Pass",
-                Score = 90
+                Score = 90 
             };
 
             db.Inspections.AddRange(inspection1, inspection2);

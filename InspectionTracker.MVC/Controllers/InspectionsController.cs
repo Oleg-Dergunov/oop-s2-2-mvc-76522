@@ -62,7 +62,7 @@ namespace InspectionTracker.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PremisesId,InspectionDate,Score,Outcome,Notes")] Inspection inspection)
+        public async Task<IActionResult> Create([Bind("Id,PremisesId,InspectionDate,Score,Notes")] Inspection inspection)
         {
             if (!ModelState.IsValid)
             {
@@ -121,7 +121,7 @@ namespace InspectionTracker.MVC.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PremisesId,InspectionDate,Score,Outcome,Notes")] Inspection inspection)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PremisesId,InspectionDate,Score,Notes")] Inspection inspection)
         {
             if (id != inspection.Id)
             {

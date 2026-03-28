@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Close";
+    var today = DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+    var inspectionDate = Model.Inspection.InspectionDate.ToString("yyyy-MM-dd");
 }
 
 <h1>Close</h1>
@@ -33,6 +35,21 @@
     <form asp-action="Close" method="post">
         @Html.AntiForgeryToken()
         <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label for="closedDate" class="control-label">Closing Date</label>
+            <input type="date"
+                   id="closedDate"
+                   name="closedDate"
+                   class="form-control"
+                   value="@today"
+                   min="@inspectionDate"
+                   max="@today"
+                   required />
+        </div>
+
+        <br />
+
         <input type="submit" value="Close" class="btn btn-success" /> |
         <a asp-action="Index">Back to List</a>
     </form>

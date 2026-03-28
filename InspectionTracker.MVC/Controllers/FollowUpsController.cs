@@ -27,7 +27,7 @@ namespace InspectionTracker.MVC.Controllers
 
             var followUps = _context.FollowUps
                 .Include(f => f.Inspection)
-                .ThenInclude(i => i.Premises);   // ← FIX
+                .ThenInclude(i => i.Premises);
 
             return View(await followUps.ToListAsync());
         }
@@ -43,7 +43,7 @@ namespace InspectionTracker.MVC.Controllers
 
             var followUp = await _context.FollowUps
                 .Include(f => f.Inspection)
-                .ThenInclude(i => i.Premises)   // ← FIX
+                .ThenInclude(i => i.Premises)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (followUp == null)
@@ -62,19 +62,26 @@ namespace InspectionTracker.MVC.Controllers
         {
             var inspections = _context.Inspections
                 .Include(i => i.Premises)
-                .ToList()
-                .Select(i => i.ToDisplayDto())
+                .Select(i => new
+                {
+                    i.Id,
+                    Display = i.ToDisplayDto().Display,
+                    InspectionDate = i.InspectionDate.ToString("yyyy-MM-dd")
+                })
                 .ToList();
 
+            ViewData["Inspections"] = inspections;
             ViewData["InspectionId"] = new SelectList(inspections, "Id", "Display");
+
             return View();
         }
+
 
         // POST: FollowUps/Create
         [Authorize(Roles = "Admin,Inspector")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,InspectionId,DueDate,ClosedDate")] FollowUp followUp)
+        public async Task<IActionResult> Create([Bind("Id,InspectionId,DueDate")] FollowUp followUp)
         {
             if (!ModelState.IsValid)
             {
@@ -94,27 +101,26 @@ namespace InspectionTracker.MVC.Controllers
             var inspection = await _context.Inspections.FindAsync(followUp.InspectionId);
             if (inspection != null && followUp.DueDate < inspection.InspectionDate)
             {
-                _log.LogWarning(
-                    "FollowUp due date earlier than inspection date. FollowUpId={FollowUpId}, InspectionId={InspectionId}",
-                    followUp.Id,
-                    followUp.InspectionId
-                );
+                ModelState.AddModelError("DueDate", "Due date cannot be earlier than inspection date.");
+
+                var inspections = _context.Inspections
+                    .Include(i => i.Premises)
+                    .ToList()
+                    .Select(i => i.ToDisplayDto())
+                    .ToList();
+
+                ViewData["InspectionId"] = new SelectList(inspections, "Id", "Display", followUp.InspectionId);
+                return View(followUp);
             }
 
-            try
-            {
-                _context.Add(followUp);
-                await _context.SaveChangesAsync();
+            followUp.ClosedDate = null;
 
-                _log.LogInformation("FollowUp created {@FollowUp}", followUp);
+            _context.Add(followUp);
+            await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                _log.LogError(ex, "Error creating FollowUp {@FollowUp}", followUp);
-                throw;
-            }
+            _log.LogInformation("FollowUp created {@FollowUp}", followUp);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: FollowUps/Edit/5
@@ -170,6 +176,21 @@ namespace InspectionTracker.MVC.Controllers
                 return View(followUp);
             }
 
+            var inspection = await _context.Inspections.FindAsync(followUp.InspectionId);
+
+            // DueDate cannot be earlier than InspectionDate
+            if (inspection != null && followUp.DueDate < inspection.InspectionDate)
+                throw new ArgumentException("Due date cannot be earlier than the inspection date.");
+
+            // ClosedDate cannot be earlier than InspectionDate
+            if (inspection != null && followUp.ClosedDate < inspection.InspectionDate)
+                throw new ArgumentException("Closed date cannot be earlier than the inspection date.");
+
+            // ClosedDate cannot be in the future
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            if (followUp.ClosedDate > today)
+                throw new ArgumentException("Closed date cannot be in the future.");
+
             try
             {
                 _context.Update(followUp);
@@ -192,11 +213,6 @@ namespace InspectionTracker.MVC.Controllers
                     throw;
                 }
             }
-            catch (Exception ex)
-            {
-                _log.LogError(ex, "Unexpected error updating FollowUp {@FollowUp}", followUp);
-                throw;
-            }
         }
 
         // GET: FollowUps/Delete/5
@@ -211,7 +227,7 @@ namespace InspectionTracker.MVC.Controllers
 
             var followUp = await _context.FollowUps
                 .Include(f => f.Inspection)
-                .ThenInclude(i => i.Premises)   // ← FIX
+                .ThenInclude(i => i.Premises)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (followUp == null)
@@ -237,22 +253,15 @@ namespace InspectionTracker.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            try
-            {
-                _context.FollowUps.Remove(followUp);
-                await _context.SaveChangesAsync();
+            _context.FollowUps.Remove(followUp);
+            await _context.SaveChangesAsync();
 
-                _log.LogWarning("FollowUp deleted Id={Id}", id);
+            _log.LogWarning("FollowUp deleted Id={Id}", id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                _log.LogError(ex, "Error deleting FollowUp Id={Id}", id);
-                throw;
-            }
+            return RedirectToAction(nameof(Index));
         }
 
+        // GET: FollowUps/Close/5
         [Authorize(Roles = "Inspector")]
         public async Task<IActionResult> Close(int id)
         {
@@ -264,31 +273,42 @@ namespace InspectionTracker.MVC.Controllers
             if (followUp == null)
                 return NotFound();
 
+            if (followUp.ClosedDate != null)
+                return RedirectToAction(nameof(Index));
+
             return View(followUp);
         }
 
-        // Closes a follow-up by setting ClosedDate today.
-        // If the follow-up is already closed, the operation is ignored.
-        // Available only to Inspector
+        // POST: FollowUps/Close/5
         [Authorize(Roles = "Inspector")]
         [HttpPost, ActionName("Close")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CloseConfirmed(int id)
+        public async Task<IActionResult> CloseConfirmed(int id, DateOnly closedDate)
         {
             var followUp = await _context.FollowUps.FindAsync(id);
             if (followUp == null)
                 return NotFound();
 
-            // Already closed → do nothing
             if (followUp.ClosedDate != null)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
-            followUp.ClosedDate = DateOnly.FromDateTime(DateTime.Today);
+            // ClosedDate cannot be earlier than InspectionDate
+            var inspection = await _context.Inspections.FindAsync(followUp.InspectionId);
+            if (inspection != null && closedDate < inspection.InspectionDate)
+                throw new ArgumentException("Closed date cannot be earlier than the inspection date.");
+
+            // ClosedDate cannot be in the future
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            if (closedDate > today)
+                throw new ArgumentException("Closed date cannot be in the future.");
+
+            followUp.ClosedDate = closedDate;
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
+
 
         private bool FollowUpExists(int id)
         {

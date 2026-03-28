@@ -64,7 +64,7 @@ namespace InspectionTracker.Tests
 
             // Close (GET, POST)
             Assert.Equal("Inspector", GetRoles("Close", typeof(int)));
-            Assert.Equal("Inspector", GetRoles("CloseConfirmed", typeof(int)));
+            Assert.Equal("Inspector", GetRoles("CloseConfirmed", typeof(int), typeof(DateOnly)));
         }
 
         [Fact]

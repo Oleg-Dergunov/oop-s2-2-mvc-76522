@@ -65,10 +65,6 @@ namespace InspectionTracker.MVC.Data
             builder.Entity<Premises>()
                 .Property(p => p.RiskRating)
                 .IsRequired();
-
-            builder.Entity<Inspection>()
-                .Property(i => i.Outcome)
-                .IsRequired();
         }
     }
 }

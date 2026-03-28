@@ -36,34 +36,34 @@ namespace InspectionTracker.MVC.Data
         private static void SeedInspections(ModelBuilder builder)
         {
             builder.Entity<Inspection>().HasData(
-                new Inspection { Id = 1, PremisesId = 1, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-2)), Score = 90, Outcome = "Pass", Notes = "Good" },
-                new Inspection { Id = 2, PremisesId = 1, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-20)), Score = 55, Outcome = "Fail", Notes = "Issues found" },
-                new Inspection { Id = 3, PremisesId = 2, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-5)), Score = 70, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 4, PremisesId = 3, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-40)), Score = 65, Outcome = "Fail", Notes = "Recheck needed" },
-                new Inspection { Id = 5, PremisesId = 4, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-10)), Score = 88, Outcome = "Pass", Notes = "Good" },
-                new Inspection { Id = 6, PremisesId = 5, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-60)), Score = 45, Outcome = "Fail", Notes = "Serious issues" },
-                new Inspection { Id = 7, PremisesId = 6, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-1)), Score = 92, Outcome = "Pass", Notes = "Excellent" },
-                new Inspection { Id = 8, PremisesId = 7, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-15)), Score = 78, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 9, PremisesId = 8, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-3)), Score = 82, Outcome = "Pass", Notes = "Good" },
-                new Inspection { Id = 10, PremisesId = 9, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-100)), Score = 50, Outcome = "Fail", Notes = "Poor" },
+                new Inspection { Id = 1, PremisesId = 1, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-2)), Score = 90, Notes = "Good" },
+                new Inspection { Id = 2, PremisesId = 1, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-20)), Score = 55, Notes = "Issues found" },
+                new Inspection { Id = 3, PremisesId = 2, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-5)), Score = 70, Notes = "OK" },
+                new Inspection { Id = 4, PremisesId = 3, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-40)), Score = 65, Notes = "Recheck needed" },
+                new Inspection { Id = 5, PremisesId = 4, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-10)), Score = 88, Notes = "Good" },
+                new Inspection { Id = 6, PremisesId = 5, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-60)), Score = 45, Notes = "Serious issues" },
+                new Inspection { Id = 7, PremisesId = 6, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-1)), Score = 92, Notes = "Excellent" },
+                new Inspection { Id = 8, PremisesId = 7, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-15)), Score = 78, Notes = "OK" },
+                new Inspection { Id = 9, PremisesId = 8, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-3)), Score = 82, Notes = "Good" },
+                new Inspection { Id = 10, PremisesId = 9, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-100)), Score = 50, Notes = "Poor" },
 
-                new Inspection { Id = 11, PremisesId = 10, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-7)), Score = 95, Outcome = "Pass", Notes = "Excellent" },
-                new Inspection { Id = 12, PremisesId = 11, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-200)), Score = 60, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 13, PremisesId = 12, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-30)), Score = 72, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 14, PremisesId = 2, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-300)), Score = 40, Outcome = "Fail", Notes = "Bad" },
-                new Inspection { Id = 15, PremisesId = 3, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-8)), Score = 85, Outcome = "Pass", Notes = "Good" },
+                new Inspection { Id = 11, PremisesId = 10, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-7)), Score = 95, Notes = "Excellent" },
+                new Inspection { Id = 12, PremisesId = 11, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-200)), Score = 60, Notes = "OK" },
+                new Inspection { Id = 13, PremisesId = 12, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-30)), Score = 72, Notes = "OK" },
+                new Inspection { Id = 14, PremisesId = 2, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-300)), Score = 40, Notes = "Bad" },
+                new Inspection { Id = 15, PremisesId = 3, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-8)), Score = 85, Notes = "Good" },
 
-                new Inspection { Id = 16, PremisesId = 4, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-12)), Score = 90, Outcome = "Pass", Notes = "Good" },
-                new Inspection { Id = 17, PremisesId = 5, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-4)), Score = 77, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 18, PremisesId = 6, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-9)), Score = 66, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 19, PremisesId = 7, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-11)), Score = 58, Outcome = "Fail", Notes = "Issues" },
-                new Inspection { Id = 20, PremisesId = 8, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-6)), Score = 80, Outcome = "Pass", Notes = "Good" },
+                new Inspection { Id = 16, PremisesId = 4, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-12)), Score = 90, Notes = "Good" },
+                new Inspection { Id = 17, PremisesId = 5, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-4)), Score = 77, Notes = "OK" },
+                new Inspection { Id = 18, PremisesId = 6, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-9)), Score = 66, Notes = "OK" },
+                new Inspection { Id = 19, PremisesId = 7, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-11)), Score = 58, Notes = "Issues" },
+                new Inspection { Id = 20, PremisesId = 8, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-6)), Score = 80, Notes = "Good" },
 
-                new Inspection { Id = 21, PremisesId = 9, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-14)), Score = 90, Outcome = "Pass", Notes = "Good" },
-                new Inspection { Id = 22, PremisesId = 10, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-16)), Score = 55, Outcome = "Fail", Notes = "Issues" },
-                new Inspection { Id = 23, PremisesId = 11, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-18)), Score = 88, Outcome = "Pass", Notes = "Good" },
-                new Inspection { Id = 24, PremisesId = 12, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-22)), Score = 60, Outcome = "Pass", Notes = "OK" },
-                new Inspection { Id = 25, PremisesId = 1, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-50)), Score = 45, Outcome = "Fail", Notes = "Bad" }
+                new Inspection { Id = 21, PremisesId = 9, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-14)), Score = 90, Notes = "Good" },
+                new Inspection { Id = 22, PremisesId = 10, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-16)), Score = 55, Notes = "Issues" },
+                new Inspection { Id = 23, PremisesId = 11, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-18)), Score = 88, Notes = "Good" },
+                new Inspection { Id = 24, PremisesId = 12, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-22)), Score = 60, Notes = "OK" },
+                new Inspection { Id = 25, PremisesId = 1, InspectionDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-50)), Score = 45, Notes = "Bad" }
             );
         }
 

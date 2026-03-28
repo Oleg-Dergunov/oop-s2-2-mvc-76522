@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InspectionTracker.Domain
 {
@@ -11,8 +12,8 @@ namespace InspectionTracker.Domain
         public DateOnly InspectionDate { get; set; }
         [Range(0, 100, ErrorMessage = "Score must be between 0 and 100.")]
         public int Score { get; set; }
-        [RegularExpression("Pass|Fail", ErrorMessage = "Outcome must be Pass or Fail.")]
-        public string Outcome { get; set; }
+        [NotMapped]
+        public string Outcome => Score >= 70 ? "Pass" : "Fail";
         public string? Notes { get; set; }
 
         public List<FollowUp> FollowUps { get; set; } = new();

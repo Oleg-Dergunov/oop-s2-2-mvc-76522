@@ -56,7 +56,8 @@ namespace InspectionTracker.MVC.Controllers
                 FailedInspectionsThisMonth = inspections
                     .Count(i => i.InspectionDate >= firstDay &&
                                 i.InspectionDate <= today &&
-                                i.Outcome == "Fail"),
+                                i.Score < 70),
+
 
                 OverdueOpenFollowUps = _context.FollowUps
                     .Include(f => f.Inspection)
