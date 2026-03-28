@@ -64,6 +64,11 @@ namespace InspectionTracker.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PremisesId,InspectionDate,Score,Notes")] Inspection inspection)
         {
+            if (inspection.InspectionDate > DateOnly.FromDateTime(DateTime.Today))
+            {
+                ModelState.AddModelError("InspectionDate", "Inspection date cannot be in the future.");
+            }
+
             if (!ModelState.IsValid)
             {
                 foreach (var kvp in ModelState)
@@ -127,6 +132,11 @@ namespace InspectionTracker.MVC.Controllers
             {
                 _log.LogWarning("Inspection Edit id mismatch. RouteId={RouteId}, ModelId={ModelId}", id, inspection.Id);
                 return NotFound();
+            }
+
+            if (inspection.InspectionDate > DateOnly.FromDateTime(DateTime.Today))
+            {
+                ModelState.AddModelError("InspectionDate", "Inspection date cannot be in the future.");
             }
 
             if (!ModelState.IsValid)
