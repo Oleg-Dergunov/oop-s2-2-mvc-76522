@@ -1,10 +1,12 @@
 ﻿using InspectionTracker.MVC.Data;
 using InspectionTracker.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace InspectionTracker.MVC.Controllers
 {
+    [Authorize(Roles = "Admin,Inspector,Viewer")]
     public class DashboardController : Controller
     {
         private readonly ApplicationDbContext _context;
