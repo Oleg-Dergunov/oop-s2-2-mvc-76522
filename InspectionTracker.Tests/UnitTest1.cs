@@ -20,7 +20,7 @@ namespace InspectionTracker.Tests
         {
             var db = GetDbContext();
 
-            var today = DateTime.Today;
+            var today = DateOnly.FromDateTime(DateTime.Today);
 
             var overdue = new FollowUp
             {
@@ -55,5 +55,6 @@ namespace InspectionTracker.Tests
             Assert.Single(result);
             Assert.Equal(1, result[0].Id);
         }
+
     }
 }

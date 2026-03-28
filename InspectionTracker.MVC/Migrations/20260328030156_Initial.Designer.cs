@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InspectionTracker.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260320013005_Initial")]
+    [Migration("20260328030156_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,64 +45,64 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 1,
-                            DueDate = new DateTime(2026, 3, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 2
                         },
                         new
                         {
                             Id = 2,
-                            DueDate = new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 4
                         },
                         new
                         {
                             Id = 3,
-                            DueDate = new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 6
                         },
                         new
                         {
                             Id = 4,
-                            DueDate = new DateTime(2026, 3, 5, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 10
                         },
                         new
                         {
                             Id = 5,
-                            ClosedDate = new DateTime(2026, 3, 17, 0, 0, 0, 0, DateTimeKind.Local),
-                            DueDate = new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            ClosedDate = new DateTime(2026, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DueDate = new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 3
                         },
                         new
                         {
                             Id = 6,
-                            ClosedDate = new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Local),
-                            DueDate = new DateTime(2026, 2, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            ClosedDate = new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DueDate = new DateTime(2026, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 7
                         },
                         new
                         {
                             Id = 7,
-                            ClosedDate = new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Local),
-                            DueDate = new DateTime(2026, 2, 8, 0, 0, 0, 0, DateTimeKind.Local),
+                            ClosedDate = new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DueDate = new DateTime(2026, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 9
                         },
                         new
                         {
                             Id = 8,
-                            DueDate = new DateTime(2026, 3, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 11
                         },
                         new
                         {
                             Id = 9,
-                            DueDate = new DateTime(2026, 3, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 12
                         },
                         new
                         {
                             Id = 10,
-                            DueDate = new DateTime(2026, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            DueDate = new DateTime(2026, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 13
                         });
                 });
@@ -139,7 +139,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 1,
-                            InspectionDate = new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 1,
@@ -148,7 +148,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 2,
-                            InspectionDate = new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Issues found",
                             Outcome = "Fail",
                             PremisesId = 1,
@@ -157,7 +157,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 3,
-                            InspectionDate = new DateTime(2026, 3, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 2,
@@ -166,7 +166,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 4,
-                            InspectionDate = new DateTime(2026, 2, 8, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Recheck needed",
                             Outcome = "Fail",
                             PremisesId = 3,
@@ -175,7 +175,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 5,
-                            InspectionDate = new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 4,
@@ -184,7 +184,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 6,
-                            InspectionDate = new DateTime(2026, 1, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Serious issues",
                             Outcome = "Fail",
                             PremisesId = 5,
@@ -193,7 +193,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 7,
-                            InspectionDate = new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Excellent",
                             Outcome = "Pass",
                             PremisesId = 6,
@@ -202,7 +202,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 8,
-                            InspectionDate = new DateTime(2026, 3, 5, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 7,
@@ -211,7 +211,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 9,
-                            InspectionDate = new DateTime(2026, 3, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 8,
@@ -220,7 +220,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 10,
-                            InspectionDate = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2025, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Poor",
                             Outcome = "Fail",
                             PremisesId = 9,
@@ -229,7 +229,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 11,
-                            InspectionDate = new DateTime(2026, 3, 13, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Excellent",
                             Outcome = "Pass",
                             PremisesId = 10,
@@ -238,7 +238,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 12,
-                            InspectionDate = new DateTime(2025, 9, 1, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2025, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 11,
@@ -247,7 +247,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 13,
-                            InspectionDate = new DateTime(2026, 2, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 12,
@@ -256,7 +256,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 14,
-                            InspectionDate = new DateTime(2025, 5, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2025, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Bad",
                             Outcome = "Fail",
                             PremisesId = 2,
@@ -265,7 +265,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 15,
-                            InspectionDate = new DateTime(2026, 3, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 3,
@@ -274,7 +274,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 16,
-                            InspectionDate = new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 4,
@@ -283,7 +283,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 17,
-                            InspectionDate = new DateTime(2026, 3, 16, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 5,
@@ -292,7 +292,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 18,
-                            InspectionDate = new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 6,
@@ -301,7 +301,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 19,
-                            InspectionDate = new DateTime(2026, 3, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Issues",
                             Outcome = "Fail",
                             PremisesId = 7,
@@ -310,7 +310,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 20,
-                            InspectionDate = new DateTime(2026, 3, 14, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 8,
@@ -319,7 +319,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 21,
-                            InspectionDate = new DateTime(2026, 3, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 9,
@@ -328,7 +328,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 22,
-                            InspectionDate = new DateTime(2026, 3, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Issues",
                             Outcome = "Fail",
                             PremisesId = 10,
@@ -337,7 +337,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 23,
-                            InspectionDate = new DateTime(2026, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Good",
                             Outcome = "Pass",
                             PremisesId = 11,
@@ -346,7 +346,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 24,
-                            InspectionDate = new DateTime(2026, 2, 26, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "OK",
                             Outcome = "Pass",
                             PremisesId = 12,
@@ -355,7 +355,7 @@ namespace InspectionTracker.MVC.Migrations
                         new
                         {
                             Id = 25,
-                            InspectionDate = new DateTime(2026, 1, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            InspectionDate = new DateTime(2026, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Notes = "Bad",
                             Outcome = "Fail",
                             PremisesId = 1,

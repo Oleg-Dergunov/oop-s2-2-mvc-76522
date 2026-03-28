@@ -9,10 +9,10 @@ namespace InspectionTracker.Domain
         public int InspectionId { get; set; }
         public Inspection? Inspection { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateOnly DueDate { get; set; }
         [NotMapped]
         public string Status => ClosedDate == null ? "Open" : "Closed";
-        public DateTime? ClosedDate { get; set; }
+        public DateOnly? ClosedDate { get; set; }
     }
 
 }

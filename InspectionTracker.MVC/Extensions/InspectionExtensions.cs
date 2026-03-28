@@ -10,7 +10,7 @@ namespace InspectionTracker.MVC.Extensions
             return new InspectionDisplayDto
             {
                 Id = i.Id,
-                Display = $"{(i.Premises?.Name ?? "[No premises]")} – {i.InspectionDate:dd/MM/yyyy}"
+                Display = $"{(i.Premises?.Name ?? "[No premises]")} – {i.InspectionDate.ToString("dd/MM/yyyy")}"
             };
         }
     }

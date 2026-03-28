@@ -52,7 +52,7 @@ namespace InspectionTracker.Tests
 
             db.Premises.AddRange(premises1, premises2);
 
-            var today = DateTime.Today;
+            var today = DateOnly.FromDateTime(DateTime.Today);
             var thisMonth = today.AddDays(-1);
             var lastMonth = today.AddMonths(-1);
 
@@ -80,15 +80,15 @@ namespace InspectionTracker.Tests
             {
                 Id = 1,
                 InspectionId = 1,
-                DueDate = today.AddDays(-5), // overdue
-                ClosedDate = null            // open
+                DueDate = today.AddDays(-5),
+                ClosedDate = null
             };
 
             var okFollowUp = new FollowUp
             {
                 Id = 2,
                 InspectionId = 1,
-                DueDate = today.AddDays(5),  // not overdue
+                DueDate = today.AddDays(5),
                 ClosedDate = null
             };
 

@@ -242,31 +242,31 @@ namespace InspectionTracker.MVC.Migrations
                 columns: new[] { "Id", "InspectionDate", "Notes", "Outcome", "PremisesId", "Score" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 1, 90 },
-                    { 2, new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Local), "Issues found", "Fail", 1, 55 },
-                    { 3, new DateTime(2026, 3, 15, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 2, 70 },
-                    { 4, new DateTime(2026, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), "Recheck needed", "Fail", 3, 65 },
-                    { 5, new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 4, 88 },
-                    { 6, new DateTime(2026, 1, 19, 0, 0, 0, 0, DateTimeKind.Local), "Serious issues", "Fail", 5, 45 },
-                    { 7, new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Local), "Excellent", "Pass", 6, 92 },
-                    { 8, new DateTime(2026, 3, 5, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 7, 78 },
-                    { 9, new DateTime(2026, 3, 17, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 8, 82 },
-                    { 10, new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Local), "Poor", "Fail", 9, 50 },
-                    { 11, new DateTime(2026, 3, 13, 0, 0, 0, 0, DateTimeKind.Local), "Excellent", "Pass", 10, 95 },
-                    { 12, new DateTime(2025, 9, 1, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 11, 60 },
-                    { 13, new DateTime(2026, 2, 18, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 12, 72 },
-                    { 14, new DateTime(2025, 5, 24, 0, 0, 0, 0, DateTimeKind.Local), "Bad", "Fail", 2, 40 },
-                    { 15, new DateTime(2026, 3, 12, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 3, 85 },
-                    { 16, new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 4, 90 },
-                    { 17, new DateTime(2026, 3, 16, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 5, 77 },
-                    { 18, new DateTime(2026, 3, 11, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 6, 66 },
-                    { 19, new DateTime(2026, 3, 9, 0, 0, 0, 0, DateTimeKind.Local), "Issues", "Fail", 7, 58 },
-                    { 20, new DateTime(2026, 3, 14, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 8, 80 },
-                    { 21, new DateTime(2026, 3, 6, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 9, 90 },
-                    { 22, new DateTime(2026, 3, 4, 0, 0, 0, 0, DateTimeKind.Local), "Issues", "Fail", 10, 55 },
-                    { 23, new DateTime(2026, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), "Good", "Pass", 11, 88 },
-                    { 24, new DateTime(2026, 2, 26, 0, 0, 0, 0, DateTimeKind.Local), "OK", "Pass", 12, 60 },
-                    { 25, new DateTime(2026, 1, 29, 0, 0, 0, 0, DateTimeKind.Local), "Bad", "Fail", 1, 45 }
+                    { 1, new DateTime(2026, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 1, 90 },
+                    { 2, new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Issues found", "Fail", 1, 55 },
+                    { 3, new DateTime(2026, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 2, 70 },
+                    { 4, new DateTime(2026, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Recheck needed", "Fail", 3, 65 },
+                    { 5, new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 4, 88 },
+                    { 6, new DateTime(2026, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "Serious issues", "Fail", 5, 45 },
+                    { 7, new DateTime(2026, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "Excellent", "Pass", 6, 92 },
+                    { 8, new DateTime(2026, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 7, 78 },
+                    { 9, new DateTime(2026, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 8, 82 },
+                    { 10, new DateTime(2025, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poor", "Fail", 9, 50 },
+                    { 11, new DateTime(2026, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Excellent", "Pass", 10, 95 },
+                    { 12, new DateTime(2025, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 11, 60 },
+                    { 13, new DateTime(2026, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 12, 72 },
+                    { 14, new DateTime(2025, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bad", "Fail", 2, 40 },
+                    { 15, new DateTime(2026, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 3, 85 },
+                    { 16, new DateTime(2026, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 4, 90 },
+                    { 17, new DateTime(2026, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 5, 77 },
+                    { 18, new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 6, 66 },
+                    { 19, new DateTime(2026, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Issues", "Fail", 7, 58 },
+                    { 20, new DateTime(2026, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 8, 80 },
+                    { 21, new DateTime(2026, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 9, 90 },
+                    { 22, new DateTime(2026, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Issues", "Fail", 10, 55 },
+                    { 23, new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Good", "Pass", 11, 88 },
+                    { 24, new DateTime(2026, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "OK", "Pass", 12, 60 },
+                    { 25, new DateTime(2026, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bad", "Fail", 1, 45 }
                 });
 
             migrationBuilder.InsertData(
@@ -274,16 +274,16 @@ namespace InspectionTracker.MVC.Migrations
                 columns: new[] { "Id", "ClosedDate", "DueDate", "InspectionId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2026, 3, 15, 0, 0, 0, 0, DateTimeKind.Local), 2 },
-                    { 2, null, new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Local), 4 },
-                    { 3, null, new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Local), 6 },
-                    { 4, null, new DateTime(2026, 3, 5, 0, 0, 0, 0, DateTimeKind.Local), 10 },
-                    { 5, new DateTime(2026, 3, 17, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Local), 3 },
-                    { 6, new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2026, 2, 18, 0, 0, 0, 0, DateTimeKind.Local), 7 },
-                    { 7, new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2026, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), 9 },
-                    { 8, null, new DateTime(2026, 3, 25, 0, 0, 0, 0, DateTimeKind.Local), 11 },
-                    { 9, null, new DateTime(2026, 3, 30, 0, 0, 0, 0, DateTimeKind.Local), 12 },
-                    { 10, null, new DateTime(2026, 4, 9, 0, 0, 0, 0, DateTimeKind.Local), 13 }
+                    { 1, null, new DateTime(2026, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 2, null, new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 3, null, new DateTime(2026, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 4, null, new DateTime(2026, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 5, new DateTime(2026, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 6, new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 7, new DateTime(2026, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 8, null, new DateTime(2026, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 11 },
+                    { 9, null, new DateTime(2026, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 12 },
+                    { 10, null, new DateTime(2026, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 13 }
                 });
 
             migrationBuilder.CreateIndex(

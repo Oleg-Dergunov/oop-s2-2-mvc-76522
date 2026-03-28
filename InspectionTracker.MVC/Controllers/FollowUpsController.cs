@@ -283,7 +283,7 @@ namespace InspectionTracker.MVC.Controllers
             if (followUp.ClosedDate != null)
                 return RedirectToAction("Index");
 
-            followUp.ClosedDate = DateTime.Today;
+            followUp.ClosedDate = DateOnly.FromDateTime(DateTime.Today);
 
             await _context.SaveChangesAsync();
 

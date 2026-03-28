@@ -32,12 +32,12 @@ namespace InspectionTracker.Tests
             var logger = NullLogger<FollowUpsController>.Instance;
             var controller = new FollowUpsController(db, logger);
 
-            var yesterday = DateTime.Today.AddDays(-1);
+            var yesterday = DateOnly.FromDateTime(DateTime.Today.AddDays(-1));
 
             var followUp = new FollowUp
             {
                 Id = 1,
-                DueDate = DateTime.Today.AddDays(-10),
+                DueDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-10)),
                 ClosedDate = yesterday
             };
 
@@ -49,6 +49,5 @@ namespace InspectionTracker.Tests
             var updated = db.FollowUps.First(f => f.Id == 1);
             Assert.Equal(yesterday, updated.ClosedDate);
         }
-
     }
 }

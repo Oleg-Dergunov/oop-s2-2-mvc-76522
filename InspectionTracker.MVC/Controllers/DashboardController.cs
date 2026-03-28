@@ -18,8 +18,8 @@ namespace InspectionTracker.MVC.Controllers
 
         public IActionResult Index(string? town, string? riskRating)
         {
-            var today = DateTime.Today;
-            var firstDay = new DateTime(today.Year, today.Month, 1);
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            var firstDay = new DateOnly(today.Year, today.Month, 1);
 
             // Base inspections query with filters
             var inspections = _context.Inspections
