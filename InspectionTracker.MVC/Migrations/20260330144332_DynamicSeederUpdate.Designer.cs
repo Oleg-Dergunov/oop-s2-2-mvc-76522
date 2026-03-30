@@ -3,6 +3,7 @@ using System;
 using InspectionTracker.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InspectionTracker.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260330144332_DynamicSeederUpdate")]
+    partial class DynamicSeederUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -75,14 +78,14 @@ namespace InspectionTracker.MVC.Migrations
                         {
                             Id = 6,
                             ClosedDate = new DateTime(2026, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2026, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DueDate = new DateTime(2026, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 7
                         },
                         new
                         {
                             Id = 7,
                             ClosedDate = new DateTime(2026, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2026, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DueDate = new DateTime(2026, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InspectionId = 9
                         },
                         new

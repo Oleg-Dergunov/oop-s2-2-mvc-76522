@@ -37,7 +37,25 @@
                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
 
                 <td>
-                    @(item.ClosedDate?.ToString("dd/MM/yyyy") ?? "-")
+                    @* CASE 1: Closed late *@
+                    @if (item.ClosedDate != null && item.ClosedDate > item.DueDate)
+                    {
+                        <span style="color:red; font-weight:bold;">
+                            @item.ClosedDate?.ToString("dd/MM/yyyy")
+                        </span>
+                    }
+                    @* CASE 2: Not closed AND overdue *@
+                    else if (item.ClosedDate == null && item.DueDate < DateOnly.FromDateTime(DateTime.Today))
+                    {
+                        <span style="color:red; font-weight:bold;">
+                            Overdue
+                        </span>
+                    }
+                    @* CASE 3: Normal display *@
+                    else
+                    {
+                        @(item.ClosedDate?.ToString("dd/MM/yyyy") ?? "-")
+                    }
                 </td>
 
                 <td>
