@@ -118,9 +118,26 @@ namespace InspectionTracker.MVC.Controllers
                 return NotFound();
             }
 
+            var today = DateOnly.FromDateTime(DateTime.Today);
+
+            // Load FollowUps
+            var followUps = await _context.FollowUps
+                .Where(f => f.InspectionId == inspection.Id)
+                .ToListAsync();
+
+            // Compute max allowed date
+            DateOnly? maxAllowed = followUps.Any()
+                ? followUps
+                    .SelectMany(f => new[] { f.DueDate, f.ClosedDate ?? f.DueDate })
+                    .Min()
+                : today;
+
+            ViewBag.MaxInspectionDate = maxAllowed?.ToString("yyyy-MM-dd");
+
             ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Name", inspection.PremisesId);
             return View(inspection);
         }
+
 
         // POST: Inspections/Edit/5
         [Authorize(Roles = "Admin")]
@@ -134,15 +151,62 @@ namespace InspectionTracker.MVC.Controllers
                 return NotFound();
             }
 
-            if (inspection.InspectionDate > DateOnly.FromDateTime(DateTime.Today))
+            var today = DateOnly.FromDateTime(DateTime.Today);
+
+            // Basic validation: cannot be in the future
+            if (inspection.InspectionDate > today)
             {
                 ModelState.AddModelError("InspectionDate", "Inspection date cannot be in the future.");
+                _log.LogWarning("Inspection Edit rejected: InspectionDate {InspectionDate} is in the future", inspection.InspectionDate);
+            }
+
+            // Load FollowUps for additional validation
+            var followUps = await _context.FollowUps
+                .Where(f => f.InspectionId == inspection.Id)
+                .ToListAsync();
+
+            // Compute MaxInspectionDate for Razor (min of all FollowUps dates)
+            DateOnly? maxAllowed = null;
+
+            if (followUps.Any())
+            {
+                maxAllowed = followUps
+                    .SelectMany(f => new[] { f.DueDate, f.ClosedDate ?? f.DueDate })
+                    .Min();
+            }
+
+            // Business validation: InspectionDate cannot exceed FU dates
+            foreach (var fu in followUps)
+            {
+                if (inspection.InspectionDate > fu.DueDate)
+                {
+                    ModelState.AddModelError("InspectionDate",
+                        $"Inspection date cannot be later than Follow-Up (Id={fu.Id}) Due Date {fu.DueDate:dd/MM/yyyy}.");
+
+                    _log.LogWarning(
+                        "Inspection Edit rejected: InspectionDate {InspectionDate} > FollowUp DueDate {DueDate} for FollowUp Id={FollowUpId}",
+                        inspection.InspectionDate, fu.DueDate, fu.Id);
+                }
+
+                if (fu.ClosedDate != null && inspection.InspectionDate > fu.ClosedDate)
+                {
+                    ModelState.AddModelError("InspectionDate",
+                        $"Inspection date cannot be later than Follow-Up (Id={fu.Id}) Closed Date {fu.ClosedDate:dd/MM/yyyy}.");
+
+                    _log.LogWarning(
+                        "Inspection Edit rejected: InspectionDate {InspectionDate} > FollowUp ClosedDate {ClosedDate} for FollowUp Id={FollowUpId}",
+                        inspection.InspectionDate, fu.ClosedDate, fu.Id);
+                }
             }
 
             if (!ModelState.IsValid)
             {
                 _log.LogWarning("Inspection Edit attempted with invalid model state");
+
                 ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Name", inspection.PremisesId);
+                ViewBag.MaxInspectionDate = maxAllowed?.ToString("yyyy-MM-dd")
+                                            ?? today.ToString("yyyy-MM-dd");
+
                 return View(inspection);
             }
 

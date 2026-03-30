@@ -23,12 +23,15 @@
 
             <div class="form-group">
                 <label asp-for="InspectionDate" class="control-label"></label>
+
                 <input asp-for="InspectionDate"
                        type="date"
                        class="form-control"
-                       max="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                       max="@(ViewBag.MaxInspectionDate ?? DateTime.Today.ToString("yyyy-MM-dd"))" />
+
                 <span asp-validation-for="InspectionDate" class="text-danger"></span>
             </div>
+
 
             <div class="form-group">
                 <label asp-for="Score" class="control-label"></label>
