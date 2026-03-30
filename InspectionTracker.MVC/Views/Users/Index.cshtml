@@ -1,0 +1,49 @@
+﻿@model List<UserRoleViewModel>
+
+<h1>User Management</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    @if (User.Identity?.Name == user.Email)
+                    {
+                        <span class="text-muted">Current User</span>
+                    }
+                    else
+                    {
+                        <form asp-action="UpdateRole" method="post">
+                            <input type="hidden" name="userId" value="@user.UserId" />
+
+                            <select name="role" class="form-control">
+
+                                <option value="" selected="@(user.CurrentRole == null)">
+                                    — no role —
+                                </option>
+
+                                @foreach (var role in user.AllRoles)
+                                {
+                                    <option value="@role" selected="@(role == user.CurrentRole)">
+                                        @role
+                                    </option>
+                                }
+                            </select>
+
+                            <button type="submit" class="btn btn-primary mt-2">Save</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
